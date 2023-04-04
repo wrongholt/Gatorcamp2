@@ -1,5 +1,5 @@
 import './styles.scss';
-import './scenes/homeScene.js';
+import HomeScene from './scenes/homeScene.js';
 import Phaser from 'phaser';
 let homeScene = new HomeScene();
 var newHeight = window.innerHeight;
