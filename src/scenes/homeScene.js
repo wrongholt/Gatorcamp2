@@ -1,4 +1,3 @@
-import Phaser from 'phaser';
 class HomeScene extends Phaser.Scene {
   constructor(args) {
     super({ key: 'HomeScene' });
