@@ -1,8 +1,7 @@
-import Phaser from 'phaser';
 import './styles.scss';
-import HomeScene from './scenes/HomeScene.js';
+import HomeScene from './scenes/HomeScene';
+import BootScene from './scenes/BootScene';
 
-let homeScene = new HomeScene();
 var newHeight = window.innerHeight;
 var newWidth = window.innerWidth;
 var config = {
@@ -15,7 +14,14 @@ var config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
 };
-
-var game = new Phaser.Game(config);
-game.scene.add('HomeScene', homeScene);
-game.scene.start('HomeScene');
+class Game extends Phaser.Game {
+  constructor() {
+    super(config);
+    this.scene.add('HomeScene', HomeScene);
+    this.scene.add('BootScene', BootScene);
+    this.scene.start('BootScene');
+  }
+}
+window.onload = function () {
+  window.game = new Game();
+};

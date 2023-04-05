@@ -1,24 +1,10 @@
+import 'phaser';
+
 class HomeScene extends Phaser.Scene {
   constructor(args) {
     super({ key: 'HomeScene' });
   }
-  preload() {
-    this.load.multiatlas(
-      'counselor1',
-      'https://the-tales-of-old.s3.amazonaws.com/assets/counselor1.json',
-      'https://the-tales-of-old.s3.amazonaws.com/assets'
-    );
-    this.load.multiatlas(
-      'counselor2',
-      'https://the-tales-of-old.s3.amazonaws.com/assets/counselor2.json',
-      'https://the-tales-of-old.s3.amazonaws.com/assets'
-    );
-    this.load.multiatlas(
-      'counselor3',
-      'https://the-tales-of-old.s3.amazonaws.com/assets/counselor3.json',
-      'https://the-tales-of-old.s3.amazonaws.com/assets'
-    );
-  }
+  preload() {}
 
   create() {
     var leftChar;
@@ -28,6 +14,7 @@ class HomeScene extends Phaser.Scene {
     var newWidth = window.innerWidth;
 
     leftChar = this.add.sprite(
+      'HomeScene',
       newWidth / 6,
       newHeight / 2,
       'counselor1',
@@ -35,13 +22,15 @@ class HomeScene extends Phaser.Scene {
     );
     leftChar.setScale(0.9, 0.9);
     centerChar = this.add.sprite(
-      newWidth / 3,
+      'HomeScene',
+      newWidth / 2.5,
       newHeight / 2,
       'counselor2',
       'counselor2Idle2_000.png'
     );
     centerChar.setScale(0.9, 0.9);
     rightChar = this.add.sprite(
+      'HomeScene',
       newWidth / 1.2,
       newHeight / 2,
       'counselor3',
