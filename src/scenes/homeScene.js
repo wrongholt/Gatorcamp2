@@ -19,21 +19,21 @@ class HomeScene extends Phaser.Scene {
       newWidth / 6,
       newHeight / 2,
       'counselor1',
-      'counselor1Idle_000.png'
+      'assets/counselor1Idle_000.png'
     );
     leftChar.setScale(0.9, 0.9);
     centerChar = this.add.sprite(
       newWidth / 1.2,
       newHeight / 2,
       'counselor2',
-      'counselor2Idle2_000.png'
+      'assets/counselor2Idle2_000.png'
     );
     centerChar.setScale(0.9, 0.9);
     rightChar = this.add.sprite(
       newWidth / 1.2,
       newHeight / 2,
       'counselor3',
-      'counselor3Idle2_000.png'
+      'assets/counselor3Idle2_000.png'
     );
     rightChar.setScale(0.9, 0.9);
     var frameNames = this.anims.generateFrameNames('counselor1', {
