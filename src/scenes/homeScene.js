@@ -14,11 +14,7 @@ class HomeScene extends Phaser.Scene {
     var centerChar;
     var newHeight = window.innerHeight;
     var newWidth = window.innerWidth;
-    let background = this.add.video(0, 0, 'background');
-    background.setOrigin(0, 0);
-    background.displayHeight = this.sys.game.config.height;
-    background.displayWidth = this.sys.game.config.width;
-    background.play(true);
+
     leftChar = this.add.sprite(
       newWidth / 6,
       newHeight / 2,
