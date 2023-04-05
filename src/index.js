@@ -1,13 +1,13 @@
 import Phaser from 'phaser';
 import './styles.scss';
-import HomeScene from './scenes/homeScene.js';
+import HomeScene from './scenes/HomeScene.js';
 
 let homeScene = new HomeScene();
 var newHeight = window.innerHeight;
 var newWidth = window.innerWidth;
 var config = {
   type: Phaser.AUTO,
-  parent: 'powers',
+  parent: 'gatorCamp',
   width: newWidth,
   height: newHeight,
   scale: {
