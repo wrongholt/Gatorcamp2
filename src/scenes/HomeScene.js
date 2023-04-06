@@ -2,7 +2,7 @@ import 'phaser';
 
 class HomeScene extends Phaser.Scene {
   constructor(args) {
-    super({ key: 'HomeScene' });
+    super();
   }
   preload() {}
 
