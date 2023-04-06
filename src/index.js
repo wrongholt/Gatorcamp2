@@ -3,7 +3,7 @@ import HomeScene from './scenes/HomeScene.js';
 import BootScene from './scenes/BootScene.js';
 
 var newHeight = window.innerHeight;
-var newWidth = window.innerWidth;
+var newWidth = window.innerWidth - 25;
 var config = {
   type: Phaser.AUTO,
   parent: 'gatorCamp',
@@ -14,6 +14,7 @@ var config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
 };
+
 class Game extends Phaser.Game {
   constructor() {
     super(config);

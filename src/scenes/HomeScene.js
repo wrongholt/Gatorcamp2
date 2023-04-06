@@ -4,9 +4,7 @@ class HomeScene extends Phaser.Scene {
   constructor(args) {
     super();
   }
-  preload() {
-    this.load.multiatlas('counselor1', 'assets/counselor1.json', 'assets');
-  }
+  preload() {}
 
   create() {
     var leftChar;
@@ -15,26 +13,27 @@ class HomeScene extends Phaser.Scene {
     var newHeight = window.innerHeight;
     var newWidth = window.innerWidth;
     leftChar = this.add.sprite(
-      newWidth / 6,
+      newWidth / 6 - 10,
       newHeight / 2,
       'counselor1',
       'counselor1Idle_000.png'
     );
-    leftChar.setScale(0.9, 0.9);
+    var scaleRatio = window.devicePixelRatio / 1.5;
+    leftChar.setScale(scaleRatio, scaleRatio);
     centerChar = this.add.sprite(
       newWidth / 2.2,
       newHeight / 2,
       'counselor2',
       'counselor2Idle_000.png'
     );
-    centerChar.setScale(0.9, 0.9);
+    centerChar.setScale(scaleRatio, scaleRatio);
     rightChar = this.add.sprite(
-      newWidth / 1.2,
+      newWidth / 1.2 - 15,
       newHeight / 2,
       'counselor3',
       'counselor3Idle_000.png'
     );
-    rightChar.setScale(0.9, 0.9);
+    rightChar.setScale(scaleRatio, scaleRatio);
     var frameNames = this.anims.generateFrameNames('counselor1', {
       start: 0,
       end: 19,
@@ -79,4 +78,5 @@ class HomeScene extends Phaser.Scene {
     rightChar.anims.play('animation3');
   }
 }
+
 export default HomeScene;
