@@ -2,7 +2,7 @@ import 'phaser';
 
 class BootScene extends Phaser.Scene {
   constructor(args) {
-    super({ key: 'BootScene' });
+    super();
   }
   preload() {
     this.load.multiatlas('counselor1', 'assets/counselor1.json', 'assets');

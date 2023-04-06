@@ -4,7 +4,9 @@ class HomeScene extends Phaser.Scene {
   constructor(args) {
     super();
   }
-  preload() {}
+  preload() {
+    this.load.multiatlas('counselor1', 'assets/counselor1.json', 'assets');
+  }
 
   create() {
     var leftChar;
@@ -12,9 +14,7 @@ class HomeScene extends Phaser.Scene {
     var centerChar;
     var newHeight = window.innerHeight;
     var newWidth = window.innerWidth;
-
     leftChar = this.add.sprite(
-      'HomeScene',
       newWidth / 6,
       newHeight / 2,
       'counselor1',
@@ -22,19 +22,17 @@ class HomeScene extends Phaser.Scene {
     );
     leftChar.setScale(0.9, 0.9);
     centerChar = this.add.sprite(
-      'HomeScene',
-      newWidth / 2.5,
+      newWidth / 2.2,
       newHeight / 2,
       'counselor2',
-      'counselor2Idle2_000.png'
+      'counselor2Idle_000.png'
     );
     centerChar.setScale(0.9, 0.9);
     rightChar = this.add.sprite(
-      'HomeScene',
       newWidth / 1.2,
       newHeight / 2,
       'counselor3',
-      'counselor3Idle2_000.png'
+      'counselor3Idle_000.png'
     );
     rightChar.setScale(0.9, 0.9);
     var frameNames = this.anims.generateFrameNames('counselor1', {

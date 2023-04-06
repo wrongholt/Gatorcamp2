@@ -1,6 +1,6 @@
 import './styles.scss';
-import HomeScene from './scenes/HomeScene';
-import BootScene from './scenes/BootScene';
+import HomeScene from './scenes/HomeScene.js';
+import BootScene from './scenes/BootScene.js';
 
 var newHeight = window.innerHeight;
 var newWidth = window.innerWidth;
