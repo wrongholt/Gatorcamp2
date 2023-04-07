@@ -10,8 +10,16 @@ class HomeScene extends Phaser.Scene {
     var leftChar;
     var rightChar;
     var centerChar;
+
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
+    var counselorContainer = this.add.container(0, newHeight * 0.2);
+    counselorContainer.setSize(newWidth, newHeight * 0.85);
+
+    var bg = this.add.image(0, 0, 'bg');
+    bg.setScale(0.76);
+    bg.setOrigin(0, 0.04);
+
     var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');
     headingImage.setOrigin(0.5);
     headingImage.setScale(newWidth / 4000);
@@ -24,7 +32,7 @@ class HomeScene extends Phaser.Scene {
     });
     var subText = this.add.text(
       -300,
-      newHeight * 0.25,
+      newHeight * 0.1,
       `Choose your Counselor`,
       {
         fontFamily: '"Cinzel"',
@@ -40,13 +48,13 @@ class HomeScene extends Phaser.Scene {
       delay: 0,
       duration: 2500,
     });
+    var leftCharContainer = this.add.container(
+      newWidth / 6 - 10,
+      newHeight / 2
+    );
+    leftCharContainer.setSize('22vw', '30vh');
     leftChar = this.add
-      .sprite(
-        newWidth / 6 - 10,
-        newHeight / 1.6,
-        'counselor1',
-        'counselor1Idle_000.png'
-      )
+      .sprite(0, 0, 'counselor1', 'counselor1Idle_000.png')
       .setInteractive();
     var scaleRatio = window.devicePixelRatio / 1.5;
     leftChar.setScale(newWidth / 1800);
@@ -60,14 +68,13 @@ class HomeScene extends Phaser.Scene {
     leftChar.on('pointerup', function (pointer) {
       this.clearTint();
     });
+    leftChar.setData({ name: 'Abigal Woods' });
+    var centerCharContainer = this.add.container(newWidth * 0.5, newHeight / 2);
+    centerCharContainer.setSize('22vw', '30vh');
     centerChar = this.add
-      .sprite(
-        newWidth * 0.5,
-        newHeight / 1.6,
-        'counselor2',
-        'counselor2Idle_000.png'
-      )
+      .sprite(0, 0, 'counselor2', 'counselor2Idle_000.png')
       .setInteractive();
+    centerChar.setData({ name: 'Father Dove' });
     centerChar.setOrigin(0.5);
     centerChar.setScale(newWidth / 1800);
     centerChar.on('pointerdown', function (pointer) {
@@ -80,14 +87,15 @@ class HomeScene extends Phaser.Scene {
     centerChar.on('pointerup', function (pointer) {
       this.clearTint();
     });
+    var rightCharContainer = this.add.container(
+      newWidth / 1.2 - 15,
+      newHeight / 2
+    );
+    rightCharContainer.setSize('22vw', '30vh');
     rightChar = this.add
-      .sprite(
-        newWidth / 1.2 - 15,
-        newHeight / 1.6,
-        'counselor3',
-        'counselor3Idle_000.png'
-      )
+      .sprite(0, 0, 'counselor3', 'counselor3Idle_000.png')
       .setInteractive();
+    rightChar.setData({ name: 'Grandpa Gator' });
     rightChar.setScale(newWidth / 1800);
     rightChar.on('pointerdown', function (pointer) {
       this.setTint(0xff0000);
@@ -99,6 +107,14 @@ class HomeScene extends Phaser.Scene {
     rightChar.on('pointerup', function (pointer) {
       this.clearTint();
     });
+    leftCharContainer.add(leftChar);
+    centerCharContainer.add(centerChar);
+    rightCharContainer.add(rightChar);
+    counselorContainer.add(bg);
+    counselorContainer.add(subText);
+    counselorContainer.add(leftCharContainer);
+    counselorContainer.add(centerCharContainer);
+    counselorContainer.add(rightCharContainer);
     var frameNames = this.anims.generateFrameNames('counselor1', {
       start: 0,
       end: 19,

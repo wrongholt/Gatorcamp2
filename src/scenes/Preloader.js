@@ -12,6 +12,7 @@ class BootScene extends Phaser.Scene {
     this.load.multiatlas('counselor3', 'assets/counselor3.json', 'assets');
     this.load.addFile(new WebFontFile(this.load, ['Cinzel', 'Lato', 'Caveat']));
     this.load.image('gatorHeading', 'assets/gatorCamp.png');
+    this.load.image('bg', 'assets/camp.jpg');
   }
 
   create() {
