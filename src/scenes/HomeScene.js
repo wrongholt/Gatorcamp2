@@ -12,6 +12,17 @@ class HomeScene extends Phaser.Scene {
     var centerChar;
     var newHeight = window.innerHeight;
     var newWidth = window.innerWidth;
+    var headingText = this.add.text(-300, 50, 'Gator Camp', {
+      fontFamily: '"Cinzel"',
+      fontSize: '50px',
+    });
+    headingText.setOrigin(0.5);
+    var tween = this.tweens.add({
+      targets: headingText,
+      x: newWidth * 0.5,
+      delay: 0,
+      duration: 2000,
+    });
     leftChar = this.add.sprite(
       newWidth / 6 - 10,
       newHeight / 2,
@@ -20,12 +31,14 @@ class HomeScene extends Phaser.Scene {
     );
     var scaleRatio = window.devicePixelRatio / 1.5;
     leftChar.setScale(scaleRatio, scaleRatio);
+
     centerChar = this.add.sprite(
-      newWidth / 2.2,
+      newWidth * 0.5,
       newHeight / 2,
       'counselor2',
       'counselor2Idle_000.png'
     );
+    centerChar.setOrigin(0.5);
     centerChar.setScale(scaleRatio, scaleRatio);
     rightChar = this.add.sprite(
       newWidth / 1.2 - 15,
