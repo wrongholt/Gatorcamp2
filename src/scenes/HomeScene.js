@@ -54,7 +54,7 @@ class HomeScene extends Phaser.Scene {
     );
     leftCharContainer.setSize('22vw', '30vh');
     leftChar = this.add
-      .sprite(0, 0, 'counselor1', 'counselor1Idle_000.png')
+      .sprite(1, 0.5, 'counselor1', 'counselor1Idle_000.png')
       .setInteractive();
     var scaleRatio = window.devicePixelRatio / 1.5;
     leftChar.setScale(newWidth / 1800);
@@ -63,7 +63,7 @@ class HomeScene extends Phaser.Scene {
     var centerCharContainer = this.add.container(newWidth * 0.5, newHeight / 2);
     centerCharContainer.setSize('22vw', '30vh');
     centerChar = this.add
-      .sprite(0, 0, 'counselor2', 'counselor2Idle_000.png')
+      .sprite(1, 0.5, 'counselor2', 'counselor2Idle_000.png')
       .setInteractive();
     centerChar.setData({ name: 'Father Dove', id: 'counselor2' });
     centerChar.setOrigin(0.5);
@@ -75,7 +75,7 @@ class HomeScene extends Phaser.Scene {
     );
     rightCharContainer.setSize('22vw', '30vh');
     rightChar = this.add
-      .sprite(0, 0, 'counselor3', 'counselor3Idle_000.png')
+      .sprite(1, 0.5, 'counselor3', 'counselor3Idle_000.png')
       .setInteractive();
     rightChar.setData({ name: 'Grandpa Gator', id: 'counselor3' });
     rightChar.setScale(newWidth / 1800);
@@ -110,26 +110,26 @@ class HomeScene extends Phaser.Scene {
       suffix: '.png',
     });
     this.anims.create({
-      key: 'animation',
+      key: 'counselor1animation',
       frames: frameNames,
       frameRate: 8,
       repeat: -1,
     });
     this.anims.create({
-      key: 'animation2',
+      key: 'counselor2animation',
       frames: frameNames2,
       frameRate: 8,
       repeat: -1,
     });
     this.anims.create({
-      key: 'animation3',
+      key: 'counselor3animation',
       frames: frameNames3,
       frameRate: 8,
       repeat: -1,
     });
-    leftChar.anims.play('animation');
-    centerChar.anims.play('animation2');
-    rightChar.anims.play('animation3');
+    leftChar.anims.play('counselor1animation');
+    centerChar.anims.play('counselor2animation');
+    rightChar.anims.play('counselor3animation');
   }
   characterClicked(character) {
     var myScene = this;
