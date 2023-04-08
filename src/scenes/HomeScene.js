@@ -135,12 +135,11 @@ class HomeScene extends Phaser.Scene {
     rightChar.anims.play('counselor3animation');
   }
   characterClicked(character) {
-    var myScene = this;
     character.on('pointerdown', function (pointer) {
       this.setTint(11843512);
       var theCharacterData = this.getData('id');
       console.log(theCharacterData);
-      myScene.scene.start('GatorCampScene', { id: theCharacterData });
+      this.scene.scene.start('GatorCampScene', { id: theCharacterData });
     });
     character.on('pointerout', function (pointer) {
       this.clearTint();

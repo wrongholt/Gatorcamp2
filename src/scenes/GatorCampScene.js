@@ -19,8 +19,20 @@ class GatorCampScene extends Phaser.Scene {
     campContainer.setSize(newWidth, newHeight * 0.85);
     var backButton = this.add.image(1, 1, 'back');
     backButton.setOrigin(-0.02, -0.02);
-    backButton.setScale(0.3);
-    this.input.on('gameobjectdown', this.backClicked.bind(this));
+    backButton.setScale(0.4);
+    backButton.setInteractive();
+    backButton.on('pointerdown', function (pointer) {
+      this.setTint(11843512);
+      console.log('Hello?!?!?');
+      this.scene.scene.start('HomeScene');
+    });
+    backButton.on('pointerout', function (pointer) {
+      this.clearTint();
+    });
+
+    backButton.on('pointerup', function (pointer) {
+      this.clearTint();
+    });
     var bg = this.add.image(0, 0, 'bg2').setPipeline('Light2D').setAlpha(0.2);
     bg.setScale(0.76);
     bg.setOrigin(0, 0.04);
@@ -112,10 +124,6 @@ class GatorCampScene extends Phaser.Scene {
     campContainer.add(rightContainer);
 
     newLeftChar.anims.play(mainCharacter + 'animation');
-  }
-  backClicked(pointer) {
-    console.log('Hello?!?!?');
-    this.scene.start('HomeScene');
   }
 }
 
