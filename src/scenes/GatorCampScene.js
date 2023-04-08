@@ -20,19 +20,7 @@ class GatorCampScene extends Phaser.Scene {
     var backButton = this.add.image(1, 1, 'back');
     backButton.setOrigin(-0.02, -0.02);
     backButton.setScale(0.3);
-    var myScene = this;
-    backButton.on('pointerdown', function (pointer) {
-      this.setTint(11843512);
-      console.log('Hello?!?!?');
-      myScene.scene.start('HomeScene');
-    });
-    backButton.on('pointerout', function (pointer) {
-      this.clearTint();
-    });
-
-    backButton.on('pointerup', function (pointer) {
-      this.clearTint();
-    });
+    this.input.on('gameobjectdown', this.backClicked.bind(this));
     var bg = this.add.image(0, 0, 'bg2').setPipeline('Light2D').setAlpha(0.2);
     bg.setScale(0.76);
     bg.setOrigin(0, 0.04);
@@ -94,9 +82,9 @@ class GatorCampScene extends Phaser.Scene {
     this.lights.enable();
     this.lights.setAmbientColor(0x808080);
 
-    var spotlight = this.lights.addLight(400, 300, 280).setIntensity(8);
+    var spotlight = this.lights.addLight(400, 300, 280).setIntensity(10);
     3;
-    campContainer.input.on('pointermove', function (pointer) {
+    this.input.on('pointermove', function (pointer) {
       spotlight.x = pointer.x;
       spotlight.y = pointer.y;
     });
@@ -105,7 +93,7 @@ class GatorCampScene extends Phaser.Scene {
 
     var currentColor = 0;
 
-    campContainer.input.on('pointerdown', function (pointer) {
+    this.input.on('pointerdown', function (pointer) {
       currentColor++;
 
       if (currentColor === colors.length) {
@@ -124,6 +112,10 @@ class GatorCampScene extends Phaser.Scene {
     campContainer.add(rightContainer);
 
     newLeftChar.anims.play(mainCharacter + 'animation');
+  }
+  backClicked(pointer) {
+    console.log('Hello?!?!?');
+    this.scene.start('HomeScene');
   }
 }
 
