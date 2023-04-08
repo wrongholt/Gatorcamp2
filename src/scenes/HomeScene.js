@@ -19,7 +19,7 @@ class HomeScene extends Phaser.Scene {
     var bg = this.add.image(0, 0, 'bg');
     bg.setScale(0.76);
     bg.setOrigin(0, 0.04);
-
+    bg.setTint(11843512);
     var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');
     headingImage.setOrigin(0.5);
     headingImage.setScale(newWidth / 4000);
@@ -58,35 +58,17 @@ class HomeScene extends Phaser.Scene {
       .setInteractive();
     var scaleRatio = window.devicePixelRatio / 1.5;
     leftChar.setScale(newWidth / 1800);
-    leftChar.on('pointerdown', function (pointer) {
-      this.setTint(0xff0000);
-    });
-    leftChar.on('pointerout', function (pointer) {
-      this.clearTint();
-    });
-
-    leftChar.on('pointerup', function (pointer) {
-      this.clearTint();
-    });
-    leftChar.setData({ name: 'Abigal Woods' });
+    this.characterClicked(leftChar);
+    leftChar.setData({ name: 'Abigal Woods', id: 'counselor1' });
     var centerCharContainer = this.add.container(newWidth * 0.5, newHeight / 2);
     centerCharContainer.setSize('22vw', '30vh');
     centerChar = this.add
       .sprite(0, 0, 'counselor2', 'counselor2Idle_000.png')
       .setInteractive();
-    centerChar.setData({ name: 'Father Dove' });
+    centerChar.setData({ name: 'Father Dove', id: 'counselor2' });
     centerChar.setOrigin(0.5);
     centerChar.setScale(newWidth / 1800);
-    centerChar.on('pointerdown', function (pointer) {
-      this.setTint(0xff0000);
-    });
-    centerChar.on('pointerout', function (pointer) {
-      this.clearTint();
-    });
-
-    centerChar.on('pointerup', function (pointer) {
-      this.clearTint();
-    });
+    this.characterClicked(centerChar);
     var rightCharContainer = this.add.container(
       newWidth / 1.2 - 15,
       newHeight / 2
@@ -95,18 +77,9 @@ class HomeScene extends Phaser.Scene {
     rightChar = this.add
       .sprite(0, 0, 'counselor3', 'counselor3Idle_000.png')
       .setInteractive();
-    rightChar.setData({ name: 'Grandpa Gator' });
+    rightChar.setData({ name: 'Grandpa Gator', id: 'counselor3' });
     rightChar.setScale(newWidth / 1800);
-    rightChar.on('pointerdown', function (pointer) {
-      this.setTint(0xff0000);
-    });
-    rightChar.on('pointerout', function (pointer) {
-      this.clearTint();
-    });
-
-    rightChar.on('pointerup', function (pointer) {
-      this.clearTint();
-    });
+    this.characterClicked(rightChar);
     leftCharContainer.add(leftChar);
     centerCharContainer.add(centerChar);
     rightCharContainer.add(rightChar);
@@ -157,6 +130,22 @@ class HomeScene extends Phaser.Scene {
     leftChar.anims.play('animation');
     centerChar.anims.play('animation2');
     rightChar.anims.play('animation3');
+  }
+  characterClicked(character) {
+    var myScene = this;
+    character.on('pointerdown', function (pointer) {
+      this.setTint(11843512);
+      var theCharacterData = this.getData('id');
+      console.log(theCharacterData);
+      myScene.scene.start('GatorCampScene', { id: theCharacterData });
+    });
+    character.on('pointerout', function (pointer) {
+      this.clearTint();
+    });
+
+    character.on('pointerup', function (pointer) {
+      this.clearTint();
+    });
   }
 }
 

@@ -1,6 +1,6 @@
 import './styles.scss';
 import HomeScene from './scenes/HomeScene.js';
-// import BootScene from './scenes/Boot.js';
+import GatorCampScene from './scenes/GatorCampScene.js';
 import Preloader from './scenes/Preloader.js';
 
 var newHeight = window.innerHeight;
@@ -10,7 +10,7 @@ class Game extends Phaser.Game {
   constructor() {
     super(config);
     this.scene.add('HomeScene', HomeScene);
-    // this.scene.add('BootScene', BootScene);
+    this.scene.add('GatorCampScene', GatorCampScene);
     this.scene.add('Preloader', Preloader);
     this.scene.start('Preloader');
   }
