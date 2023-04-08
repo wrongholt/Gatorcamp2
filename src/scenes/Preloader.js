@@ -13,6 +13,8 @@ class BootScene extends Phaser.Scene {
     this.load.addFile(new WebFontFile(this.load, ['Cinzel', 'Lato', 'Caveat']));
     this.load.image('gatorHeading', 'assets/gatorCamp.png');
     this.load.image('bg', 'assets/camp.jpg');
+    this.load.image('bg2', 'assets/camp.jpg');
+    this.load.image('back', 'assets/backNeon.png');
   }
 
   create() {

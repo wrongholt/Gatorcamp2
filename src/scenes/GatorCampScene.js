@@ -13,10 +13,27 @@ class GatorCampScene extends Phaser.Scene {
     var newLeftChar;
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
+    var topContainer = this.add.container(0, 0);
+    topContainer.setSize(newWidth, newHeight * 0.15);
     var campContainer = this.add.container(0, newHeight * 0.2);
     campContainer.setSize(newWidth, newHeight * 0.85);
+    var backButton = this.add.image(1, 1, 'back');
+    backButton.setOrigin(-0.02, -0.02);
+    backButton.setScale(0.3);
+    var myScene = this;
+    backButton.on('pointerdown', function (pointer) {
+      this.setTint(11843512);
+      console.log('Hello?!?!?');
+      myScene.scene.start('HomeScene');
+    });
+    backButton.on('pointerout', function (pointer) {
+      this.clearTint();
+    });
 
-    var bg = this.add.image(0, 0, 'bg').setPipeline('Light2D').setAlpha(0.2);
+    backButton.on('pointerup', function (pointer) {
+      this.clearTint();
+    });
+    var bg = this.add.image(0, 0, 'bg2').setPipeline('Light2D').setAlpha(0.2);
     bg.setScale(0.76);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
@@ -79,7 +96,7 @@ class GatorCampScene extends Phaser.Scene {
 
     var spotlight = this.lights.addLight(400, 300, 280).setIntensity(8);
     3;
-    this.input.on('pointermove', function (pointer) {
+    campContainer.input.on('pointermove', function (pointer) {
       spotlight.x = pointer.x;
       spotlight.y = pointer.y;
     });
@@ -88,7 +105,7 @@ class GatorCampScene extends Phaser.Scene {
 
     var currentColor = 0;
 
-    this.input.on('pointerdown', function (pointer) {
+    campContainer.input.on('pointerdown', function (pointer) {
       currentColor++;
 
       if (currentColor === colors.length) {
@@ -99,7 +116,8 @@ class GatorCampScene extends Phaser.Scene {
     });
     var rightContainer = this.add.container(newWidth / 1.2 - 15, newHeight / 2);
     rightContainer.setSize('88vw', '30vh');
-
+    topContainer.add(headingImage);
+    topContainer.add(backButton);
     newLeftContainer.add(newLeftChar);
     campContainer.add(bg);
     campContainer.add(newLeftContainer);

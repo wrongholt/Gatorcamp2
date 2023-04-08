@@ -13,6 +13,8 @@ class HomeScene extends Phaser.Scene {
 
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
+    var topContainer = this.add.container(0, 0);
+    topContainer.setSize(newWidth, newHeight * 0.15);
     var counselorContainer = this.add.container(0, newHeight * 0.2);
     counselorContainer.setSize(newWidth, newHeight * 0.85);
 
@@ -80,6 +82,7 @@ class HomeScene extends Phaser.Scene {
     rightChar.setData({ name: 'Grandpa Gator', id: 'counselor3' });
     rightChar.setScale(newWidth / 1800);
     this.characterClicked(rightChar);
+    topContainer.add(headingImage);
     leftCharContainer.add(leftChar);
     centerCharContainer.add(centerChar);
     rightCharContainer.add(rightChar);
