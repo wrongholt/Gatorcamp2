@@ -19,7 +19,7 @@ class HomeScene extends Phaser.Scene {
     counselorContainer.setSize(newWidth, newHeight * 0.85);
 
     var bg = this.add.image(0, 0, 'bg');
-    bg.setScale(0.76);
+    bg.setScale(newWidth / 1920);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
     var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');

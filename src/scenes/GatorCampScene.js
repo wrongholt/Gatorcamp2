@@ -34,7 +34,7 @@ class GatorCampScene extends Phaser.Scene {
       this.clearTint();
     });
     var bg = this.add.image(0, 0, 'bg2').setPipeline('Light2D').setAlpha(0.2);
-    bg.setScale(0.76);
+    bg.setScale(newWidth / 1920);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
     var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');
