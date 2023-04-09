@@ -13,17 +13,13 @@ class GatorCampScene extends Phaser.Scene {
     var newLeftChar;
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
-    var topContainer = this.add.container(0, 0);
-    topContainer.setSize(newWidth, newHeight * 0.15);
-    var campContainer = this.add.container(0, newHeight * 0.2);
-    campContainer.setSize(newWidth, newHeight * 0.85);
+
     var backButton = this.add.image(1, 1, 'back');
     backButton.setOrigin(-0.02, -0.02);
     backButton.setScale(0.4);
     backButton.setInteractive();
     backButton.on('pointerdown', function (pointer) {
       this.setTint(11843512);
-      console.log('Hello?!?!?');
       this.scene.scene.start('HomeScene');
     });
     backButton.on('pointerout', function (pointer) {
@@ -33,7 +29,7 @@ class GatorCampScene extends Phaser.Scene {
     backButton.on('pointerup', function (pointer) {
       this.clearTint();
     });
-    var bg = this.add.image(0, 0, 'bg2').setPipeline('Light2D').setAlpha(0.2);
+    var bg = this.add.image(0, 0, 'bg').setPipeline('Light2D').setAlpha(0.2);
     bg.setScale(newWidth / 1920);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
@@ -47,8 +43,34 @@ class GatorCampScene extends Phaser.Scene {
       delay: 0,
       duration: 1000,
     });
-    var newLeftContainer = this.add.container(newWidth / 6 - 10, newHeight / 2);
-    newLeftContainer.setSize('22vw', '30vh');
+    var owl = this.add
+      .image(-450, -390, 'owl')
+      .setBlendMode(Phaser.BlendModes.NORMAL)
+      .setPipeline('Light2D')
+      .setAlpha(0.6)
+      .setInteractive();
+    owl.setScale(0.03);
+    owl.setOrigin(0.5, 0.5);
+    var bear = this.add
+      .image(60, -250, 'bear')
+      .setBlendMode(Phaser.BlendModes.NORMAL)
+      .setPipeline('Light2D')
+      .setAlpha(0.6)
+      .setInteractive();
+    bear.setScale(0.1);
+    bear.setOrigin(0.5, 0.5);
+    var gator = this.add
+      .image(-260, -100, 'gator2')
+      .setBlendMode(Phaser.BlendModes.NORMAL)
+      .setPipeline('Light2D')
+      .setAlpha(0.6)
+      .setInteractive();
+    gator.setScale(newWidth / 3800);
+    gator.setOrigin(0.5, 0.5);
+    gator.on('pointerover', function (pointer) {
+      console.log('Hello');
+    });
+    gator.on('pointerout', function (pointer) {});
     var mainCharacter = this.characterId;
     console.log('THE NEW CHAR---->>>>', mainCharacter);
     newLeftChar = this.add
@@ -114,8 +136,20 @@ class GatorCampScene extends Phaser.Scene {
 
       spotlight.setColor(colors[currentColor]);
     });
-    var rightContainer = this.add.container(newWidth / 1.2 - 15, newHeight / 2);
+    var topContainer = this.add.container(0, 0);
+    topContainer.setSize(newWidth, newHeight * 0.15);
+    var campContainer = this.add.container(0, newHeight * 0.2);
+    campContainer.setSize(newWidth, newHeight * 0.85);
+    var newLeftContainer = this.add.container(newWidth / 6 - 10, newHeight / 2);
+    newLeftContainer.setSize('22vw', '30vh');
+    var rightContainer = this.add.container(
+      newWidth / 1.2 - 10,
+      campContainer.height
+    );
     rightContainer.setSize('88vw', '30vh');
+    rightContainer.add(gator);
+    rightContainer.add(bear);
+    rightContainer.add(owl);
     topContainer.add(headingImage);
     topContainer.add(backButton);
     newLeftContainer.add(newLeftChar);
