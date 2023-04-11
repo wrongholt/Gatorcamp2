@@ -89,13 +89,40 @@ class GatorCampScene extends Phaser.Scene {
     bg.setScale(newWidth / 1920);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
-    var headingImage = this.add.image(
-      newWidth * 0.5,
-      newHeight * 0.1,
-      'gatorHeading'
-    );
+    var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading2');
     headingImage.setOrigin(0.5);
     headingImage.setScale(newWidth / 4000);
+    this.tweens.add({
+      targets: headingImage,
+      y: newHeight * 0.1,
+      ease: 'Bounce.easeInOut',
+      delay: 0,
+      duration: 1000,
+    });
+    var frameNames2;
+    if (mainCharacter === 'counselor1') {
+      frameNames2 = this.anims.generateFrameNames(mainCharacter, {
+        start: 0,
+        end: 3,
+        zeroPad: 3,
+        prefix: mainCharacter + 'Attack_',
+        suffix: '.png',
+      });
+    } else {
+      frameNames2 = this.anims.generateFrameNames(mainCharacter, {
+        start: 0,
+        end: 6,
+        zeroPad: 3,
+        prefix: mainCharacter + 'Attack_',
+        suffix: '.png',
+      });
+    }
+    this.anims.create({
+      key: mainCharacter + 'animation2',
+      frames: frameNames2,
+      frameRate: 8,
+      repeat: 1,
+    });
     var owl = this.add
       .image(-450, -390, 'owl')
       .setBlendMode(Phaser.BlendModes.NORMAL)
@@ -127,8 +154,15 @@ class GatorCampScene extends Phaser.Scene {
         '"We have tons of food and the choices are endless(not really): Chicken or Kale."';
       speechContainer.setVisible(true);
       content.setText(quote);
-      console.log('Hello');
+      this.setPosition(-460, -100);
+      newLeftChar.anims.play(mainCharacter + 'animation2');
+      this.scene.time.delayedCall(
+        Phaser.Timer.SECOND * 3,
+        this.destroy(),
+        this
+      );
     });
+    speechContainer.setVisible(false);
     gator.on('pointerout', function (pointer) {
       speechContainer.setVisible(false);
     });
@@ -138,7 +172,6 @@ class GatorCampScene extends Phaser.Scene {
         '"Be careful where you go you never know what is lurking in the shadows."';
       speechContainer.setVisible(true);
       content.setText(quote);
-      console.log('Hello');
     });
     bear.on('pointerout', function (pointer) {
       speechContainer.setVisible(false);
@@ -148,7 +181,6 @@ class GatorCampScene extends Phaser.Scene {
       quote = '"There are tons of animals and plants to see."';
       speechContainer.setVisible(true);
       content.setText(quote);
-      console.log('Hello');
     });
     owl.on('pointerout', function (pointer) {
       speechContainer.setVisible(false);
@@ -160,30 +192,7 @@ class GatorCampScene extends Phaser.Scene {
     newLeftChar.setScale(newWidth / 1800);
     newLeftChar.on('pointerdown', function (pointer) {
       this.setTint(11843512);
-      var frameNames2;
-      if (mainCharacter === 'counselor1') {
-        frameNames2 = this.anims.generateFrameNames(mainCharacter, {
-          start: 0,
-          end: 3,
-          zeroPad: 3,
-          prefix: mainCharacter + 'Attack_',
-          suffix: '.png',
-        });
-      } else {
-        frameNames2 = this.anims.generateFrameNames(mainCharacter, {
-          start: 0,
-          end: 6,
-          zeroPad: 3,
-          prefix: mainCharacter + 'Attack_',
-          suffix: '.png',
-        });
-      }
-      this.anims.create({
-        key: mainCharacter + 'animation2',
-        frames: frameNames2,
-        frameRate: 8,
-        repeat: 1,
-      });
+
       newLeftChar.anims.play(mainCharacter + 'animation2');
     });
     newLeftChar.on('pointerout', function (pointer) {
