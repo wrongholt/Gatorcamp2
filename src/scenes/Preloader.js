@@ -14,7 +14,7 @@ class BootScene extends Phaser.Scene {
     this.load.image('gatorHeading', 'assets/gatorCamp.png');
     this.load.image('gatorHeading2', 'assets/gatorCamp.png');
     this.load.image('bg', 'assets/camp.jpg');
-    this.load.image('back', 'assets/backNeon.png');
+    this.load.image('backButton', 'assets/backNeon.png');
     this.load.image('owl', 'assets/owl.png');
     this.load.image('gator2', 'assets/gator2.png');
     this.load.image('bear', 'assets/bear.png');

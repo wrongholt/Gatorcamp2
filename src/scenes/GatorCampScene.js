@@ -14,9 +14,9 @@ class GatorCampScene extends Phaser.Scene {
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
     var mainCharacter = this.characterId;
-    var topContainer = this.add.container(0, 0);
+    // var topContainer = this.add.container(0, 0);
     var speechContainer = this.add.container(250, 380);
-    topContainer.setSize(newWidth, newHeight * 0.15);
+    // topContainer.setSize(newWidth, newHeight * 0.15);
     var bubbleWidth = 200;
     var bubbleHeight = 200;
     var bubblePadding = 10;
@@ -70,9 +70,8 @@ class GatorCampScene extends Phaser.Scene {
     speechContainer.add(bubble);
     speechContainer.add(content);
     speechContainer.setVisible(false);
-    var backButton = this.add.image(1, 1, 'back');
-    backButton.setOrigin(-0.02, -0.02);
-    backButton.setScale(0.4);
+    var backButton = this.add.image(1, 1, 'backButton');
+    backButton.setOrigin(-1, -1);
     backButton.setInteractive();
     backButton.on('pointerdown', function (pointer) {
       this.setTint(11843512);
@@ -151,18 +150,20 @@ class GatorCampScene extends Phaser.Scene {
     gator.on('pointerover', function (pointer) {
       // speech.setVisible(true);
       quote =
-        '"We have tons of food and the choices are endless(not really): Chicken or Kale."';
+        '"We have tons of food and the choices are endless(not really): Chicken or Kale. Well, I guess Gator is back on the menu."';
       speechContainer.setVisible(true);
       content.setText(quote);
       this.setPosition(-460, -100);
       newLeftChar.anims.play(mainCharacter + 'animation2');
-      this.scene.time.delayedCall(
-        Phaser.Timer.SECOND * 3,
-        this.destroy(),
-        this
-      );
+      this.scene.tweens.add({
+        targets: this,
+        alpha: 0,
+        ease: 'Quad.easeInOut',
+        delay: 1000,
+        duration: 1000,
+      });
     });
-    speechContainer.setVisible(false);
+
     gator.on('pointerout', function (pointer) {
       speechContainer.setVisible(false);
     });
@@ -239,8 +240,8 @@ class GatorCampScene extends Phaser.Scene {
     rightContainer.add(gator);
     rightContainer.add(bear);
     rightContainer.add(owl);
-    topContainer.add(headingImage);
-    topContainer.add(backButton);
+    // topContainer.add(headingImage);
+    // topContainer.add(backButton);
     newLeftContainer.add(newLeftChar);
     campContainer.add(bg);
     campContainer.add(newLeftContainer);
