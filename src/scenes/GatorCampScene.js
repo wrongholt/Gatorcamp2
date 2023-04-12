@@ -14,9 +14,9 @@ class GatorCampScene extends Phaser.Scene {
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
     var mainCharacter = this.characterId;
-    // var topContainer = this.add.container(0, 0);
-    var speechContainer = this.add.container(250, 380);
-    // topContainer.setSize(newWidth, newHeight * 0.15);
+    var topContainer = this.add.container(0, 0);
+    var speechContainer = this.add.container(newWidth * 0.17, newHeight * 0.34);
+    topContainer.setSize(newWidth, newHeight * 0.15);
     var bubbleWidth = 200;
     var bubbleHeight = 200;
     var bubblePadding = 10;
@@ -71,7 +71,7 @@ class GatorCampScene extends Phaser.Scene {
     speechContainer.add(content);
     speechContainer.setVisible(false);
     var backButton = this.add.image(1, 1, 'backButton');
-    backButton.setOrigin(-1, -1);
+    backButton.setOrigin(0, 0);
     backButton.setInteractive();
     backButton.on('pointerdown', function (pointer) {
       this.setTint(11843512);
@@ -88,7 +88,7 @@ class GatorCampScene extends Phaser.Scene {
     bg.setScale(newWidth / 1920);
     bg.setOrigin(0, 0.04);
     bg.setTint(11843512);
-    var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading2');
+    var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');
     headingImage.setOrigin(0.5);
     headingImage.setScale(newWidth / 4000);
     this.tweens.add({
@@ -123,28 +123,28 @@ class GatorCampScene extends Phaser.Scene {
       repeat: 1,
     });
     var owl = this.add
-      .image(-450, -390, 'owl')
+      .image(newWidth * 0.55, newHeight * 0.64, 'owl')
       .setBlendMode(Phaser.BlendModes.NORMAL)
       .setPipeline('Light2D')
       .setAlpha(0.6)
       .setInteractive();
-    owl.setScale(0.03);
+    owl.setScale(newWidth / 8500);
     owl.setOrigin(0.5, 0.5);
     var bear = this.add
-      .image(60, -250, 'bear')
+      .image(newWidth * 0.85, newHeight * 0.76, 'bear')
       .setBlendMode(Phaser.BlendModes.NORMAL)
       .setPipeline('Light2D')
       .setAlpha(0.6)
       .setInteractive();
-    bear.setScale(0.1);
+    bear.setScale(newWidth / 6500);
     bear.setOrigin(0.5, 0.5);
     var gator = this.add
-      .image(-260, -100, 'gator2')
+      .image(newWidth * 0.6, newHeight * 0.95, 'gator2')
       .setBlendMode(Phaser.BlendModes.NORMAL)
       .setPipeline('Light2D')
       .setAlpha(0.6)
       .setInteractive();
-    gator.setScale(newWidth / 3800);
+    gator.setScale(newWidth / 3500);
     gator.setOrigin(0.5, 0.5);
     // speechContainer.add(speech);
     gator.on('pointerover', function (pointer) {
@@ -153,19 +153,28 @@ class GatorCampScene extends Phaser.Scene {
         '"We have tons of food and the choices are endless(not really): Chicken or Kale. Well, I guess Gator is back on the menu."';
       speechContainer.setVisible(true);
       content.setText(quote);
-      this.setPosition(-460, -100);
       newLeftChar.anims.play(mainCharacter + 'animation2');
-      this.scene.tweens.add({
+      var timeline = this.scene.tweens.createTimeline();
+      timeline.add({
+        targets: this,
+        x: newWidth * 0.5,
+        ease: 'Quad.easeOut',
+        delay: 0,
+        duration: 500,
+      });
+      timeline.add({
         targets: this,
         alpha: 0,
         ease: 'Quad.easeInOut',
         delay: 1000,
         duration: 1000,
       });
+      timeline.play();
     });
 
     gator.on('pointerout', function (pointer) {
       speechContainer.setVisible(false);
+      newLeftChar.anims.play(mainCharacter + 'animation');
     });
     bear.on('pointerover', function (pointer) {
       // speech.setVisible(true);
@@ -232,20 +241,20 @@ class GatorCampScene extends Phaser.Scene {
     campContainer.setSize(newWidth, newHeight * 0.85);
     var newLeftContainer = this.add.container(newWidth / 6 - 10, newHeight / 2);
     newLeftContainer.setSize('22vw', '30vh');
-    var rightContainer = this.add.container(
-      newWidth / 1.2 - 10,
-      campContainer.height
-    );
-    rightContainer.setSize('88vw', '30vh');
-    rightContainer.add(gator);
-    rightContainer.add(bear);
-    rightContainer.add(owl);
+    // var rightContainer = this.add.container(
+    //   newWidth / 1.2 - 10,
+    //   campContainer.height
+    // );
+    // rightContainer.setSize('88vw', '30vh');
+    // rightContainer.add(gator);
+    // rightContainer.add(bear);
+    // rightContainer.add(owl);
     // topContainer.add(headingImage);
-    // topContainer.add(backButton);
+    topContainer.add(backButton);
     newLeftContainer.add(newLeftChar);
     campContainer.add(bg);
     campContainer.add(newLeftContainer);
-    campContainer.add(rightContainer);
+    // campContainer.add(rightContainer);
 
     newLeftChar.anims.play(mainCharacter + 'animation');
   }
