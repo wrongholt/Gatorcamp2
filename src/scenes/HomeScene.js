@@ -13,18 +13,22 @@ class HomeScene extends Phaser.Scene {
 
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
-    var topContainer = this.add.container(0, 0);
-    topContainer.setSize(newWidth, newHeight * 0.15);
-    var counselorContainer = this.add.container(0, newHeight * 0.2);
-    counselorContainer.setSize(newWidth, newHeight * 0.85);
+    var topContainer = this.add
+      .container(0, 0)
+      .setSize(newWidth, newHeight * 0.15);
+    var counselorContainer = this.add
+      .container(0, newHeight * 0.2)
+      .setSize(newWidth, newHeight * 0.85);
 
-    var bg = this.add.image(0, 0, 'bg');
-    bg.setScale(newWidth / 1920);
-    bg.setOrigin(0, 0.04);
-    bg.setTint(11843512);
-    var headingImage = this.add.image(newWidth * 0.5, -500, 'gatorHeading');
-    headingImage.setOrigin(0.5);
-    headingImage.setScale(newWidth / 4000);
+    var bg = this.add
+      .image(0, 0, 'bg')
+      .setScale(newWidth / 1920)
+      .setOrigin(0, 0.04)
+      .setTint(11843512);
+    var headingImage = this.add
+      .image(newWidth * 0.5, -500, 'gatorHeading')
+      .setOrigin(0.5)
+      .setScale(newWidth / 4000);
     this.tweens.add({
       targets: headingImage,
       y: newHeight * 0.1,
@@ -32,17 +36,12 @@ class HomeScene extends Phaser.Scene {
       delay: 0,
       duration: 1000,
     });
-    var subText = this.add.text(
-      -300,
-      newHeight * 0.1,
-      `Choose your Counselor`,
-      {
+    var subText = this.add
+      .text(-300, newHeight * 0.1, `Choose your Counselor`, {
         fontFamily: '"Cinzel"',
         fontSize: '4vw',
-      }
-    );
-    console.log(this.game.config.width);
-    subText.setOrigin(0.5);
+      })
+      .setOrigin(0.5);
     this.tweens.add({
       targets: subText,
       x: newWidth * 0.5,
@@ -50,37 +49,33 @@ class HomeScene extends Phaser.Scene {
       delay: 0,
       duration: 2500,
     });
-    var leftCharContainer = this.add.container(
-      newWidth / 6 - 10,
-      newHeight / 2
-    );
-    leftCharContainer.setSize('22vw', '30vh');
+    var leftCharContainer = this.add
+      .container(newWidth / 6 - 10, newHeight / 2)
+      .setSize('22vw', '30vh');
     leftChar = this.add
       .sprite(1, 0.5, 'counselor1', 'counselor1Idle_000.png')
-      .setInteractive();
-    var scaleRatio = window.devicePixelRatio / 1.5;
-    leftChar.setScale(newWidth / 1800);
+      .setInteractive()
+      .setScale(newWidth / 1800)
+      .setData({ name: 'Abigal Woods', id: 'counselor1' });
     this.characterClicked(leftChar);
-    leftChar.setData({ name: 'Abigal Woods', id: 'counselor1' });
+
     var centerCharContainer = this.add.container(newWidth * 0.5, newHeight / 2);
     centerCharContainer.setSize('22vw', '30vh');
     centerChar = this.add
       .sprite(1, 0.5, 'counselor2', 'counselor2Idle_000.png')
-      .setInteractive();
-    centerChar.setData({ name: 'Father Dove', id: 'counselor2' });
-    centerChar.setOrigin(0.5);
-    centerChar.setScale(newWidth / 1800);
+      .setInteractive()
+      .setData({ name: 'Father Dove', id: 'counselor2' })
+      .setOrigin(0.5)
+      .setScale(newWidth / 1800);
     this.characterClicked(centerChar);
-    var rightCharContainer = this.add.container(
-      newWidth / 1.2 - 15,
-      newHeight / 2
-    );
-    rightCharContainer.setSize('22vw', '30vh');
+    var rightCharContainer = this.add
+      .container(newWidth / 1.2 - 15, newHeight / 2)
+      .setSize('22vw', '30vh');
     rightChar = this.add
       .sprite(1, 0.5, 'counselor3', 'counselor3Idle_000.png')
-      .setInteractive();
-    rightChar.setData({ name: 'Grandpa Gator', id: 'counselor3' });
-    rightChar.setScale(newWidth / 1800);
+      .setInteractive()
+      .setData({ name: 'Grandpa Gator', id: 'counselor3' })
+      .setScale(newWidth / 1800);
     this.characterClicked(rightChar);
     topContainer.add(headingImage);
     leftCharContainer.add(leftChar);
