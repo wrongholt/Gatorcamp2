@@ -11,56 +11,23 @@ class GatorCampScene extends Phaser.Scene {
   }
   create() {
     var newLeftChar;
+    var quote = '';
     var newHeight = this.game.config.height;
     var newWidth = this.game.config.width;
     var mainCharacter = this.characterId;
     var topContainer = this.add.container(0, 0);
-    var speechContainer = this.add.container(newWidth * 0.17, newHeight * 0.34);
+    var speechContainerHeight = newWidth * 0.25;
+    if (newHeight <= 780) speechContainerHeight = newWidth * 0.2;
+    var speechContainer = this.add.container(
+      newWidth * 0.17,
+      speechContainerHeight
+    );
+    var bally = this.createBall(0, 0);
+    bally.setVisible(false);
     topContainer.setSize(newWidth, newHeight * 0.15);
-    var bubbleWidth = 200;
-    var bubbleHeight = 200;
-    var bubblePadding = 10;
-    var arrowHeight = bubbleHeight / 4;
-
-    var bubble = this.add.graphics({ x: 0, y: 0 });
-    var quote = '';
-    //  Bubble shadow
-    bubble
-      .fillStyle(0x222222, 0.5)
-      .fillRoundedRect(6, 6, bubbleWidth, bubbleHeight, 16)
-      .fillStyle(0xffffff, 1)
-      .lineStyle(4, 0x565656, 1)
-      .strokeRoundedRect(0, 0, bubbleWidth, bubbleHeight, 16)
-      .fillRoundedRect(0, 0, bubbleWidth, bubbleHeight, 16);
-
-    //  Calculate arrow coordinates
-    var point1X = Math.floor(bubbleWidth / 7);
-    var point1Y = bubbleHeight;
-    var point2X = Math.floor((bubbleWidth / 7) * 2);
-    var point2Y = bubbleHeight;
-    var point3X = Math.floor(bubbleWidth / 7);
-    var point3Y = Math.floor(bubbleHeight + arrowHeight);
-
-    //  Bubble arrow shadow
-    bubble
-      .lineStyle(4, 0x222222, 0.5)
-      .lineBetween(point2X - 1, point2Y + 6, point3X + 2, point3Y)
-      .fillTriangle(point1X, point1Y, point2X, point2Y, point3X, point3Y)
-      .lineStyle(2, 0x565656, 1)
-      .lineBetween(point2X, point2Y, point3X, point3Y)
-      .lineBetween(point1X, point1Y, point3X, point3Y);
-
-    var content = this.add
-      .text(0, 0, quote, {
-        fontFamily: 'Arial',
-        fontSize: 20,
-        color: '#000000',
-        align: 'center',
-        wordWrap: { width: bubbleWidth - bubblePadding * 2 },
-      })
-      .setPosition(bubble.x + 15, bubble.y + 15);
-    speechContainer.add(bubble);
-    speechContainer.add(content);
+    var speechBubble = this.createSpeechBubble(quote);
+    speechContainer.add(speechBubble.bubble);
+    speechContainer.add(speechBubble.content);
     speechContainer.setVisible(false);
     var backButton = this.add
       .image(10, 10, 'backButton')
@@ -130,7 +97,18 @@ class GatorCampScene extends Phaser.Scene {
       .on('pointerover', function (pointer) {
         quote = '"There are tons of animals and plants to see."';
         speechContainer.setVisible(true);
-        content.setText(quote);
+        speechBubble.content.setText(quote);
+        bally.setPosition(this.x, this.y);
+        bally.setVisible(true);
+        this.scene.tweens.add({
+          targets: bally,
+          x: 40,
+          y: 80,
+          alpha: 0,
+          scale: 0.1,
+          ease: 'sine.in',
+          duration: 1750,
+        });
       })
       .on('pointerout', function (pointer) {
         speechContainer.setVisible(false);
@@ -147,7 +125,7 @@ class GatorCampScene extends Phaser.Scene {
         quote =
           '"Be careful where you go you never know what is lurking in the shadows."';
         speechContainer.setVisible(true);
-        content.setText(quote);
+        speechBubble.content.setText(quote);
       })
       .on('pointerout', function (pointer) {
         speechContainer.setVisible(false);
@@ -164,7 +142,7 @@ class GatorCampScene extends Phaser.Scene {
         quote =
           '"We have tons of food and the choices are endless(not really): Chicken or Kale. Well, I guess Gator is back on the menu."';
         speechContainer.setVisible(true);
-        content.setText(quote);
+        speechBubble.content.setText(quote);
         newLeftChar.anims.play(mainCharacter + 'animation2');
         var timeline = this.scene.tweens.createTimeline();
         timeline.add({
@@ -232,6 +210,77 @@ class GatorCampScene extends Phaser.Scene {
     campContainer.add(bg);
     campContainer.add(newLeftContainer);
     newLeftChar.anims.play(mainCharacter + 'animation');
+  }
+  createSpeechBubble(quote) {
+    var bubbleWidth = 225;
+    var bubbleHeight = 175;
+    var bubblePadding = 10;
+    var arrowHeight = bubbleHeight / 4;
+
+    var bubble = this.add.graphics({ x: 0, y: 0 });
+    //  Bubble shadow
+    bubble
+      .fillStyle(0x222222, 0.5)
+      .fillRoundedRect(6, 6, bubbleWidth, bubbleHeight, 16)
+      .fillStyle(0xffffff, 1)
+      .lineStyle(4, 0x565656, 1)
+      .strokeRoundedRect(0, 0, bubbleWidth, bubbleHeight, 16)
+      .fillRoundedRect(0, 0, bubbleWidth, bubbleHeight, 16);
+
+    //  Calculate arrow coordinates
+    var point1X = Math.floor(bubbleWidth / 7);
+    var point1Y = bubbleHeight;
+    var point2X = Math.floor((bubbleWidth / 7) * 2);
+    var point2Y = bubbleHeight;
+    var point3X = Math.floor(bubbleWidth / 7);
+    var point3Y = Math.floor(bubbleHeight + arrowHeight);
+
+    //  Bubble arrow shadow
+    bubble
+      .lineStyle(4, 0x222222, 0.5)
+      .lineBetween(point2X - 1, point2Y + 6, point3X + 2, point3Y)
+      .fillTriangle(point1X, point1Y, point2X, point2Y, point3X, point3Y)
+      .lineStyle(2, 0x565656, 1)
+      .lineBetween(point2X, point2Y, point3X, point3Y)
+      .lineBetween(point1X, point1Y, point3X, point3Y);
+
+    var content = this.add
+      .text(0, 0, quote, {
+        fontFamily: 'Arial',
+        fontSize: 20,
+        color: '#000000',
+        align: 'center',
+        wordWrap: { width: bubbleWidth - bubblePadding * 2 },
+      })
+      .setPosition(bubble.x + 15, bubble.y + 15);
+
+    // const b = content.getBounds();
+
+    // content.setPosition(
+    //   bubble.x + bubbleWidth / 2 - b.width / 2,
+    //   bubble.y + bubbleHeight / 2 - b.height / 2
+    // );
+
+    return { bubble, content };
+  }
+  createBall(x, y) {
+    var ball = this.add.graphics();
+    ball.fillGradientStyle(0xff0000, 0xff0000, 0xffff00, 0xffff00, 1);
+    ball.fillCircle(10, 10, 10);
+    ball.setPosition(x, y);
+    const fx1 = ball.postFX.addGlow(0xff0000, 0, 0, false, 0.1, 24);
+    if (ball.visible === true) {
+      this.tweens.add({
+        targets: fx1,
+        color: 0xffff00,
+        outerStrength: 4,
+        yoyo: true,
+        loop: -1,
+        ease: 'sine.inout',
+      });
+    }
+
+    return ball;
   }
 }
 
