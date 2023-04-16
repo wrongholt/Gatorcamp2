@@ -29,6 +29,20 @@ class GatorCampScene extends Phaser.Scene {
     speechContainer.add(speechBubble.bubble);
     speechContainer.add(speechBubble.content);
     speechContainer.setVisible(false);
+    var theCounter = 0;
+    var questComplete = this.add.text(
+      20,
+      newHeight * 0.001,
+      `Quests Complete`,
+      {
+        fontFamily: '"Cinzel"',
+        fontSize: '2vw',
+      }
+    );
+    var questCounter = this.add.text(20, newHeight * 0.055, `${theCounter}/3`, {
+      fontFamily: '"Cinzel"',
+      fontSize: '2vw',
+    });
     var backButton = this.add
       .image(10, 10, 'backButton')
       .setScale(newWidth / 3000)
@@ -86,6 +100,7 @@ class GatorCampScene extends Phaser.Scene {
       frameRate: 8,
       repeat: 1,
     });
+    var owlQuest = false;
     var owl = this.add
       .image(newWidth * 0.55, newHeight * 0.64, 'owl')
       .setBlendMode(Phaser.BlendModes.NORMAL)
@@ -96,23 +111,30 @@ class GatorCampScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .on('pointerover', function (pointer) {
         quote = '"There are tons of animals and plants to see."';
+        if (!owlQuest) {
+          owlQuest = true;
+          theCounter++;
+          questCounter.setText(`${theCounter}/3`);
+          bally = this.scene.createBall(this.x, this.y);
+          bally.setVisible(true);
+          this.scene.tweens.add({
+            targets: bally,
+            x: 40,
+            y: 150,
+            alpha: 0,
+            scale: 0.1,
+            ease: 'sine.in',
+            duration: 1750,
+          });
+        }
+
         speechContainer.setVisible(true);
         speechBubble.content.setText(quote);
-        bally.setPosition(this.x, this.y);
-        bally.setVisible(true);
-        this.scene.tweens.add({
-          targets: bally,
-          x: 40,
-          y: 80,
-          alpha: 0,
-          scale: 0.1,
-          ease: 'sine.in',
-          duration: 1750,
-        });
       })
       .on('pointerout', function (pointer) {
         speechContainer.setVisible(false);
       });
+    var bearQuest = false;
     var bear = this.add
       .image(newWidth * 0.85, newHeight * 0.76, 'bear')
       .setBlendMode(Phaser.BlendModes.NORMAL)
@@ -122,6 +144,22 @@ class GatorCampScene extends Phaser.Scene {
       .setScale(newWidth / 6500)
       .setOrigin(0.5, 0.5)
       .on('pointerover', function (pointer) {
+        if (!bearQuest) {
+          bearQuest = true;
+          theCounter++;
+          questCounter.setText(`${theCounter}/3`);
+          bally = this.scene.createBall(this.x, this.y);
+          bally.setVisible(true);
+          this.scene.tweens.add({
+            targets: bally,
+            x: 40,
+            y: 150,
+            alpha: 0,
+            scale: 0.1,
+            ease: 'sine.in',
+            duration: 1750,
+          });
+        }
         quote =
           '"Be careful where you go you never know what is lurking in the shadows."';
         speechContainer.setVisible(true);
@@ -130,6 +168,8 @@ class GatorCampScene extends Phaser.Scene {
       .on('pointerout', function (pointer) {
         speechContainer.setVisible(false);
       });
+    var gatorQuest = false;
+
     var gator = this.add
       .image(newWidth * 0.6, newHeight * 0.95, 'gator2')
       .setBlendMode(Phaser.BlendModes.NORMAL)
@@ -139,28 +179,47 @@ class GatorCampScene extends Phaser.Scene {
       .setScale(newWidth / 3500)
       .setOrigin(0.5, 0.5)
       .on('pointerover', function (pointer) {
+        if (!gatorQuest) {
+          gatorQuest = true;
+          theCounter++;
+          questCounter.setText(`${theCounter}/3`);
+          bally = this.scene.createBall(this.x, this.y);
+          bally.setVisible(true);
+          this.scene.tweens.add({
+            targets: bally,
+            x: 40,
+            y: 150,
+            alpha: 0,
+            scale: 0.1,
+            ease: 'sine.in',
+            duration: 1750,
+          });
+        }
         quote =
           '"We have tons of food and the choices are endless(not really): Chicken or Kale. Well, I guess Gator is back on the menu."';
         speechContainer.setVisible(true);
         speechBubble.content.setText(quote);
         newLeftChar.anims.play(mainCharacter + 'animation2');
-        var timeline = this.scene.tweens.createTimeline();
-        timeline.add({
-          targets: this,
-          x: newWidth * 0.5,
-          ease: 'Quad.easeOut',
-          delay: 0,
-          duration: 500,
+
+        this.scene.tweens.chain({
+          targets: gator,
+          tweens: [
+            {
+              x: newWidth * 0.5,
+              ease: 'Quad.easeOut',
+              delay: 0,
+              duration: 500,
+            },
+            {
+              alpha: 0,
+              ease: 'Quad.easeInOut',
+              delay: 1000,
+              duration: 1000,
+            },
+          ],
         });
-        timeline.add({
-          targets: this,
-          alpha: 0,
-          ease: 'Quad.easeInOut',
-          delay: 1000,
-          duration: 1000,
-        });
-        timeline.play();
       })
+
       .on('pointerout', function (pointer) {
         speechContainer.setVisible(false);
         newLeftChar.anims.play(mainCharacter + 'animation');
@@ -209,6 +268,8 @@ class GatorCampScene extends Phaser.Scene {
     newLeftContainer.add(newLeftChar);
     campContainer.add(bg);
     campContainer.add(newLeftContainer);
+    campContainer.add(questCounter);
+    campContainer.add(questComplete);
     newLeftChar.anims.play(mainCharacter + 'animation');
   }
   createSpeechBubble(quote) {

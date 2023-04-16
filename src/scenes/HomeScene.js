@@ -39,7 +39,7 @@ class HomeScene extends Phaser.Scene {
     var subText = this.add
       .text(-300, newHeight * 0.1, `Choose your Counselor`, {
         fontFamily: '"Cinzel"',
-        fontSize: '4vw',
+        fontSize: '3vw',
       })
       .setOrigin(0.5);
     this.tweens.add({
