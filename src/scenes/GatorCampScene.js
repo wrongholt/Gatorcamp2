@@ -127,7 +127,7 @@ class GatorCampScene extends Phaser.Scene {
             duration: 1750,
           });
         }
-
+        this.scene.sound.add('owlAudio').play();
         speechContainer.setVisible(true);
         speechBubble.content.setText(quote);
       })
@@ -196,6 +196,7 @@ class GatorCampScene extends Phaser.Scene {
             duration: 1750,
           });
         }
+        this.scene.sound.add('gatorAudio').play();
         quote =
           '"We have tons of food and the choices are endless(not really): Chicken or Kale. Well, I guess Gator is back on the menu."';
         speechContainer.setVisible(true);
