@@ -18,6 +18,9 @@ class BootScene extends Phaser.Scene {
     this.load.image('owl', 'assets/owl.png');
     this.load.image('gator2', 'assets/gator2.png');
     this.load.image('bear', 'assets/bear.png');
+    this.load.audio('bearAudio', [
+      'soundbank://soundlibrary/animals/amzn_sfx_bear_groan_roar_01',
+    ]);
   }
 
   create() {

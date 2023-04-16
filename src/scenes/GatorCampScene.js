@@ -160,6 +160,7 @@ class GatorCampScene extends Phaser.Scene {
             duration: 1750,
           });
         }
+        this.scene.sound.add('bearAudio').play();
         quote =
           '"Be careful where you go you never know what is lurking in the shadows."';
         speechContainer.setVisible(true);
