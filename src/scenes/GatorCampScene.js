@@ -33,7 +33,7 @@ class GatorCampScene extends Phaser.Scene {
     var questComplete = this.add.text(
       20,
       newHeight * 0.001,
-      `Quests Complete`,
+      `Quests Completed`,
       {
         fontFamily: '"Cinzel"',
         fontSize: '2vw',
