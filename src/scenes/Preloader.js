@@ -24,7 +24,7 @@ class BootScene extends Phaser.Scene {
     });
     this.load.audio({
       key: 'bgAudio',
-      url: 'assets/Forest_Loop_01.wav',
+      url: 'assets/nightForest.mp3',
     });
     this.load.audio({
       key: 'owlAudio',
