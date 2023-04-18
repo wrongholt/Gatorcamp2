@@ -17,6 +17,8 @@ class GatorCampScene extends Phaser.Scene {
     var mainCharacter = this.characterId;
     var bgSound = this.sound.add('bgAudio');
     bgSound.play();
+    // bgSound.on('loop', listener);
+    bgSound.setLoop(true);
     var topContainer = this.add.container(0, 0);
     var speechContainerHeight = newWidth * 0.25;
     if (newHeight <= 780) speechContainerHeight = newWidth * 0.2;
@@ -52,7 +54,7 @@ class GatorCampScene extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', function (pointer) {
         this.setTint(11843512);
-        bgSound.stop();
+        this.scene.sound.stopAll();
         this.scene.scene.start('HomeScene');
       })
       .on('pointerout', function (pointer) {
