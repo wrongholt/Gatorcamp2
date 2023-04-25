@@ -1,0 +1,7 @@
+{
+  "name": "Gator Camp",
+  "id": "com.example.gatorcamp",
+  "version": "1.0.0",
+  "orientation": "landscape",
+  "fullscreen": "true"
+}
